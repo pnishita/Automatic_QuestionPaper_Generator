@@ -19,7 +19,6 @@ public class GeneratorService {
         if (n > allQuestions.size()) {
             throw new IllegalArgumentException("Requested number of questions exceeds available questions.");
         }
-        // Shuffle and select n unique questions
         return random.ints(0, allQuestions.size())
                 .distinct()
                 .limit(n)
