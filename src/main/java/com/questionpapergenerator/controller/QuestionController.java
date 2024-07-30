@@ -14,6 +14,10 @@ public class QuestionController {
    public QuestionController(QuestionService questionService) {
        this.questionService = questionService;
    }
+
+   @PostMapping("/addAll")
+   public String addQuestions(@RequestBody List<Question> questions){questionService.addQuestions(questions);return "Added Successfully";
+   }
     @GetMapping("/all")
     public List<Question> getAllQuestions() {
         return questionService.getQuestions();
