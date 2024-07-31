@@ -17,7 +17,6 @@ public class PdfService {
         try {
             PdfWriter.getInstance(document, baos);
             document.open();
-
             for (Question question : questions) {
                 document.add(new Paragraph("Question: " + que++));
                 document.add(new Paragraph("Question: " + question.getQuestionText()));

@@ -1,4 +1,5 @@
 package com.questionpapergenerator.service;
+import com.questionpapergenerator.exception.NoRecordsFoundExpcetion;
 import com.questionpapergenerator.model.Question;
 import com.questionpapergenerator.repository.QuestionsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +15,15 @@ public class GeneratorService {
     public GeneratorService(QuestionsRepo questionRepository) {
         this.questionRepository=questionRepository;
     }
-    public List<Question> generateUniqueQuestions(int n, Long subjectId) {
+    public List<Question> generateQuestionsBySubject(int numberofquestions, Long subjectId) {
         List<Question> allQuestions = questionRepository.findBySubjectId(subjectId);
-        if (n > allQuestions.size()) {
+        if (allQuestions.isEmpty()){throw new NoRecordsFoundExpcetion("data not found");}
+        if (numberofquestions > allQuestions.size()) {
             throw new IllegalArgumentException("Requested number of questions exceeds available questions.");
         }
         return random.ints(0, allQuestions.size())
                 .distinct()
-                .limit(n)
+                .limit(numberofquestions)
                 .mapToObj(allQuestions::get)
                 .collect(Collectors.toList());
     }
