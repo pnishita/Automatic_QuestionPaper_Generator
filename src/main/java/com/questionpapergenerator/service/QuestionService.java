@@ -18,7 +18,7 @@ public class QuestionService {
     public void saveQuestion(Question question) {
         questionRepo.save(question);
     }
-    public List<Question> getQuestions(){
+    public List<Question> getAllQuestions(){
         log.info("GEt Question service called");
         return questionRepo.findAll();
     }
@@ -28,7 +28,7 @@ public class QuestionService {
         questionList.forEach(mcq -> log.info(mcq.getQuestionText()));
         return questionList;
     }
-    public void deleteMCQ(Long id) {
+    public void deleteQuestionById(Long id) {
         questionRepo.deleteById(id);
     }
     public Optional<Question> getQuestionById(Long id) {

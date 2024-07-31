@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+
 @RestController
 @RequestMapping("/generate")
 public class GeneratorController {
@@ -19,6 +20,7 @@ public class GeneratorController {
         this.generatorService=generatorService;
         this.pdfService=pdfService;
     }
+
     @GetMapping("/getquestions/v1/{numberofquestion}/{subjectID}")
     public List<Question> getQuestions(@PathVariable("numberofquestion") int numberofquestion,@PathVariable("subjectID") Long subjectId) {
         return generatorService.generateQuestionsBySubject(numberofquestion, subjectId);

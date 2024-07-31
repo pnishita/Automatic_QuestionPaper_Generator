@@ -1,6 +1,7 @@
 package com.questionpapergenerator.controller;
 
 import com.questionpapergenerator.exception.ErrorResponse;
+import com.questionpapergenerator.exception.NoRecordsFoundExpcetion;
 import com.questionpapergenerator.exception.PdfGenerationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,4 +29,16 @@ public class GlobalExceptionHandler {
         );
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
     }
+
+
+    @ExceptionHandler(NoRecordsFoundExpcetion.class)
+    @ResponseBody
+    public ResponseEntity<ErrorResponse>  handleNoRecordsFoundExpcetion(IllegalArgumentException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                ex.toString(),
+                "No Records available"
+        );
+        return ResponseEntity.badRequest().body(errorResponse);
+    }
+
 }
