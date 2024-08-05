@@ -4,11 +4,9 @@ import com.questionpapergenerator.repository.QuestionsRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 @Slf4j
 @Service
 public class QuestionService {
@@ -20,7 +18,7 @@ public class QuestionService {
     public void saveQuestion(Question question) {
         questionRepo.save(question);
     }
-    public List<Question> getQuestions(){
+    public List<Question> getAllQuestions(){
         log.info("GEt Question service called");
         return questionRepo.findAll();
     }
@@ -30,12 +28,11 @@ public class QuestionService {
         questionList.forEach(mcq -> log.info(mcq.getQuestionText()));
         return questionList;
     }
-
-    public void deleteMCQ(Long id) {
+    public void deleteQuestionById(Long id) {
         questionRepo.deleteById(id);
     }
-
     public Optional<Question> getQuestionById(Long id) {
        return questionRepo.findById(id);
     }
+    public void addQuestions(List<Question> questions) {questionRepo.saveAll(questions);}
 }

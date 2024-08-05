@@ -19,7 +19,6 @@ public class Question {
     private String optionC;
     private String optionD;
     private String correctAnswer;
-
     @ManyToOne
     @JoinColumn(name = "subject_id", nullable = false)
     private Subject subject;
