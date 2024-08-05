@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
+@CrossOrigin(origins = "http://localhost:4200")
 @Slf4j
 @RestController
 @RequestMapping("/subjects")
@@ -27,3 +28,9 @@ public class SubjectController {
         return "succes";
         }
     }
+//    public void deleteSubject(Long subjectId) {
+//        Subject subject = subjectRepository.findById(subjectId)
+//                .orElseThrow(() -> new RuntimeException("Subject not found"));
+//        questionRepository.deleteAll(subject.getQuestions());
+//        subjectRepository.delete(subject);
+//    }
