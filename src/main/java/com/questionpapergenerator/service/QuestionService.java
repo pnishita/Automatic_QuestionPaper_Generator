@@ -4,9 +4,9 @@ import com.questionpapergenerator.repository.QuestionsRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class QuestionService {
@@ -23,16 +23,15 @@ public class QuestionService {
         return questionRepo.findAll();
     }
     public List<Question> getQuestionsBySubject(Long id){
-        List<Question> q= questionRepo.findAll();
-        List<Question> questionList= q.stream().filter(q1 -> q1.getId().equals(id)).collect(Collectors.toList());
-        questionList.forEach(mcq -> log.info(mcq.getQuestionText()));
-        return questionList;
+         return questionRepo.findBySubjectId(id);
     }
+    @Transactional
     public void deleteQuestionById(Long id) {
         questionRepo.deleteById(id);
     }
     public Optional<Question> getQuestionById(Long id) {
        return questionRepo.findById(id);
     }
-    public void addQuestions(List<Question> questions) {questionRepo.saveAll(questions);}
+    public void addAllQuestions(List<Question> questions) {questionRepo.saveAll(questions);}
+    public void addQuestion(Question questions) {questionRepo.save(questions);}
 }
