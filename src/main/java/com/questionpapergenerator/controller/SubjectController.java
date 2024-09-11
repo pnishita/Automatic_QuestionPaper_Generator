@@ -25,12 +25,6 @@ public class SubjectController {
     @PostMapping("/save")
     public String createSubject(@RequestBody Subject subject) {
         subjectService.saveSubject(subject);
-        return "succes";
+        return "success";
         }
     }
-//    public void deleteSubject(Long subjectId) {
-//        Subject subject = subjectRepository.findById(subjectId)
-//                .orElseThrow(() -> new RuntimeException("Subject not found"));
-//        questionRepository.deleteAll(subject.getQuestions());
-//        subjectRepository.delete(subject);
-//    }

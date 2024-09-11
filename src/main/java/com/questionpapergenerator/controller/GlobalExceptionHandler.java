@@ -3,7 +3,6 @@ package com.questionpapergenerator.controller;
 import com.questionpapergenerator.exception.ErrorResponse;
 import com.questionpapergenerator.exception.NoRecordsFoundExpcetion;
 import com.questionpapergenerator.exception.PdfGenerationException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -27,7 +26,7 @@ public class GlobalExceptionHandler {
                 "PDF Generation Error",
                 "An error occurred while generating the PDF: " + ex.getMessage()
         );
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        return ResponseEntity.internalServerError().body(errorResponse);
     }
 
 
