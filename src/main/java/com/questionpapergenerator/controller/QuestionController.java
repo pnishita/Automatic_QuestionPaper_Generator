@@ -40,7 +40,10 @@ public class QuestionController {
     }
     @DeleteMapping("/deletequestion/{id}")
     public ResponseEntity<Void> deleteQuestion(@PathVariable Long id) {
-        questionService.deleteQuestionById(id);
-        return ResponseEntity.noContent().build();
+        if (questionService.deleteQuestionById(id)) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

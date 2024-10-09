@@ -26,8 +26,17 @@ public class QuestionService {
          return questionRepo.findBySubjectId(id);
     }
     @Transactional
-    public void deleteQuestionById(Long id) {
-        questionRepo.deleteById(id);
+    public boolean deleteQuestionById(Long id) {
+        log.info("Attempting to delete question with id: {}", id);
+        if (questionRepo.existsById(id)) {
+            questionRepo.deleteById(id);
+            log.info("Deleted question with id: {}", id);
+            return true;
+        } else {
+            log.warn("Question with id: {} does not exist", id);
+            return false;
+        }
+
     }
     public Optional<Question> getQuestionById(Long id) {
        return questionRepo.findById(id);
